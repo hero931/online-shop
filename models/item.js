@@ -1,9 +1,9 @@
 const fs = require('fs');
 const path = require('path');
 
-const p = path.join(path.dirname(process.mainModule.filename), 'data', 'item.json');
+const p = path.join(path.dirname(process.mainModule.filename), 'data', 'items.json');
 
-const getItemDetails = callback => {
+const getItems = callback => {
     fs.readFile(p, (err, fileContent) => {
         if(err) {
             callback([]);
@@ -22,15 +22,15 @@ module.exports = class Item {
     }
 
     save() {
-        getItemDetails(details => {
-            details.push(this);
-            fs.writeFile(p, JSON.stringify(details), err => {
+        getItems(items => {
+            items.push(this);
+            fs.writeFile(p, JSON.stringify(items), err => {
                 console.log(err);
             });
         });
     }
 
     static fetchAll(callback) {
-        getItemDetails(callback);
+        getItems(callback);
     }
 };

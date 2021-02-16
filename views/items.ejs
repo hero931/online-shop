@@ -1,0 +1,26 @@
+<%- include('./includes/head.ejs') %>        
+  </head>
+    <body>
+        <%- include('./includes/navigation.ejs') %>
+        <main>
+          <% if(items.length > 0) { %>
+            <div>
+              <% for(let item of items) { %>
+                  <div class="card" style="width: 20rem;">
+                    <img src="<%= item.imageUrl %>" class="card-img-top" alt="<%= item.title %>">
+                    <div class="card-body">
+                      <h5 class="card-title"><%= item.title %></h5>
+                      <p class="card-text">$<%= item.price %></p>
+                      <p class="card-text"><%= item.description %></p>
+                      <a href="/edit-item" class="btn btn-primary">Edit</a>
+                      <form action="/delete-item" class="row" method="POST">
+                        <button class="btn btn-secondary" type="submit">Delete</button>
+                      </form>
+                    </div>
+                  </div>
+              <% } %>
+            </div>
+          <% } else { %>
+            <h2>No Items Found!</h2>
+            <% } %>
+        </main>
