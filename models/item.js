@@ -22,6 +22,7 @@ module.exports = class Item {
     }
 
     save() {
+        this.id = Math.random().toString();
         getItems(items => {
             items.push(this);
             fs.writeFile(p, JSON.stringify(items), err => {
@@ -30,7 +31,25 @@ module.exports = class Item {
         });
     }
 
+    static deleteById(id) {
+        getItems(items => {
+            const updatedItems = items.filter(i => i.id !== id);
+            fs.writeFile(p, JSON.stringify(updatedItems), err => {
+                if(!err) {
+                    
+                }
+            })
+        });
+    }
+
     static fetchAll(callback) {
         getItems(callback);
+    }
+
+    static findById(id, callback) {
+        getItems(items => {
+            const item = items.find(i => i.id === id);
+            callback(item);
+        });
     }
 };

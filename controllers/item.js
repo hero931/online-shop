@@ -1,9 +1,9 @@
 const Item = require('../models/item');
 
-exports.addItem = (req, res, next)=> {
+exports.addItem = (req, res, next)=> {  
   res.render('addItem', {
     pageTitle: 'Add Item',
-    path: '/add-item'
+    path: '/add-item'    
   });
 };
 
@@ -25,4 +25,19 @@ exports.getItems = (req, res, next) => {
       path: '/items'
     });
   });
+};
+
+exports.deleteItem = (req, res, next) => {
+  const itemId = req.body.itemId;
+};
+
+exports.getItemId = (req, res, next) => {
+  const itemId = req.params.itemId;
+  Item.findById(itemId, item => {
+    res.render('itemInfo', {
+      item: item,
+      pageTitle: 'Item Information',
+      path: '/item-info'
+    });
+  });  
 };
