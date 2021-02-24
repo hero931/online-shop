@@ -39,11 +39,13 @@ exports.deleteItem = (req, res, next) => {
 
 exports.getItemId = (req, res, next) => {
   const itemId = req.params.itemId;
-  Item.findById(itemId, item => {
-    res.render('itemInfo', {
-      item: item,
-      pageTitle: 'Item Information',
-      path: '/item-info'
-    });
-  });  
+  Item.findById(itemId)
+    .then(([item]) => {
+      res.render('itemInfo', {
+        item: item[0],
+        pageTitle: 'Item Information',
+        path: '/item-info'
+      }); 
+    })
+    .catch(err => console.log(err));       
 };
