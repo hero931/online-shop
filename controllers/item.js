@@ -12,19 +12,25 @@ exports.postAddItem = (req, res, next) => {
   const imageUrl = req.body.imageUrl;
   const description = req.body.description;
   const price = req.body.price;
-  const item = new Item(title, imageUrl, description, price);
-  item.save();
-  res.redirect('/');
+  const item = new Item(null, title, imageUrl, description, price);
+  item
+  .save()
+  .then(() => {
+    res.redirect('/items');
+  })
+  .catch(err => console.log(err));  
 };
 
 exports.getItems = (req, res, next) => {
-  Item.fetchAll(items => {
+  Item.fetchAll()
+  .then(([rows, fieldData]) => {
     res.render('items', {
-      items: items,
+      items: rows,
       pageTitle: 'Items',
       path: '/items'
-    });
-  });
+    }); 
+  })
+  .catch(err => console.log(err));     
 };
 
 exports.deleteItem = (req, res, next) => {
