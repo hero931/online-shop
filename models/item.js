@@ -1,6 +1,5 @@
 const db = require('../util/database');
 
-
 module.exports = class Item {
     constructor(id, title, imageUrl, description, price) {
         this.id = id;
