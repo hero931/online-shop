@@ -12,13 +12,17 @@ exports.postAddItem = (req, res, next) => {
   const imageUrl = req.body.imageUrl;
   const description = req.body.description;
   const price = req.body.price;
-  const item = new Item(null, title, imageUrl, description, price);
-  item
-  .save()
-  .then(() => {
-    res.redirect('/items');
+  Item.create({
+    title: title,
+    imageUrl: imageUrl,
+    description: description,
+    price: price
+  }).then(result => {
+    console.log(result);
   })
-  .catch(err => console.log(err));  
+    .catch(err => {
+      console.log(err);
+    }); 
 };
 
 exports.getItems = (req, res, next) => {
