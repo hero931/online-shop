@@ -18,7 +18,7 @@ exports.postAddItem = (req, res, next) => {
     description: description,
     price: price
   }).then(result => {
-    console.log(result);
+    res.redirect('/items');
   })
     .catch(err => {
       console.log(err);
@@ -26,10 +26,10 @@ exports.postAddItem = (req, res, next) => {
 };
 
 exports.getItems = (req, res, next) => {
-  Item.fetchAll()
-  .then(([rows, fieldData]) => {
+  Item.findAll()
+  .then(items => {
     res.render('items', {
-      items: rows,
+      items: items,
       pageTitle: 'Items',
       path: '/items'
     }); 
@@ -39,14 +39,22 @@ exports.getItems = (req, res, next) => {
 
 exports.deleteItem = (req, res, next) => {
   const itemId = req.body.itemId;
+  Item.findByPk(itemId)
+  .then(item => {
+    return item.destroy();
+  })
+  .then(item => {    
+    res.redirect('/items');
+  })
+  .catch(err => console.log(err));
 };
 
 exports.getItemId = (req, res, next) => {
   const itemId = req.params.itemId;
-  Item.findById(itemId)
-    .then(([item]) => {
+  Item.findByPk(itemId)
+    .then(item => {
       res.render('itemInfo', {
-        item: item[0],
+        item: item,
         pageTitle: 'Item Information',
         path: '/item-info'
       }); 
