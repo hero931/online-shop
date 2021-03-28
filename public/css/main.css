@@ -1,8 +1,27 @@
+* {
+  box-sizing: border-box;
+  }
+
 ul {
     list-style-type: none;    
   }
 
 #items {
   display: grid;  
-  justify-content: space-evenly;  
+  justify-content: space-evenly;
+  margin: 1rem;  
+}
+
+#info {
+  display: grid;
+  margin: 1rem;
+  align-items: center;  
+}
+
+#itemInfo {
+  display: grid;
+  padding: 0.5rem;
+  justify-content: center;  
+  box-shadow: 3px 6px rgb(151, 138, 138);
+  border-radius: 6px;  
 }
