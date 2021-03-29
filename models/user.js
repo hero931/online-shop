@@ -8,19 +8,19 @@ const User = sequelize.define('user', {
         autoIncrement: true,
         allowNull: false,
         primaryKey: true
-    },    
+    },   
     imageUrl: {
-        type: Sequelize.STRING,
-        allowNull: false
-    },
-    fullName: {
         type: Sequelize.STRING,
         allowNull: false
     },
     userName: {
         type: Sequelize.STRING,
         allowNull: false
-    } 
+    },
+    fullName: {
+        type: Sequelize.STRING,
+        allowNull: false
+    }
 });
 
 module.exports = User;

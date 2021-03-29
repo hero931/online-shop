@@ -6,4 +6,7 @@ const newUser = require('../controllers/user');
 
 router.get('/add-user', newUser.addUser);
 
+router.post('/add-user', newUser.postUser);
+
+
 module.exports = router;
