@@ -1,0 +1,25 @@
+<%- include('./includes/head.ejs') %> 
+</head>
+<body>
+    <%- include('./includes/navigation.ejs') %>
+    <main>
+      <% if(users.length > 0) { %>
+        <div>
+          <% for(let user of users) { %>
+              <div class="container" id="items">
+                <div class="card" style="width: 20rem;">
+                  <img src="<%= user.imageUrl %>" class="card-img-top" alt="<%= user.imageUrl %>">
+                  <div class="card-body">
+                    <h5 class="card-title"><%= user.userName %></h5>
+                    <p class="card-text"><%= user.fullName %></p>                    
+                    <a href="/user-details/<%= user.id %>" class="btn btn-outline-primary">Details</a>                                           
+                  </div>                                            
+                  </div>
+                </div>
+              </div>
+          <% } %>
+        </div>
+      <% } else { %>
+        <h2>No Users Found!</h2>
+        <% } %>
+    </main>

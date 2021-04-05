@@ -22,3 +22,38 @@ exports.postUser = (req, res, next) => {
     });
 };
 
+exports.getUsers = (req, res, next) => {
+    User.findAll()
+    .then(users => {
+        res.render('users', {
+            users: users,
+            pageTitle: 'List of users',
+            path: '/users'
+        });
+    }).catch(err => console.log(err));
+};
+
+exports.getUserId = (req, res, next) => {
+    const userId = req.params.userId;
+    User.findByPk(userId)
+    .then(user => {        
+        res.render('userDetails', {
+            user: user,
+            pageTitle: 'Details about user',
+            path: '/user-details'
+        });
+    }).catch(err => console.log(err));
+};
+
+exports.deleteUser = (req, res, next) => {
+    const userId = req.body.userId;
+    User.findByPk(userId)
+    .then(user => {
+        return user.destroy();
+    })
+    .then(user => {
+        res.redirect('/users')
+    })
+    .catch(err => console.log(err));
+};
+
